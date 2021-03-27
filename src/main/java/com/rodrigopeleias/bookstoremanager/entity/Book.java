@@ -1,5 +1,10 @@
 package com.rodrigopeleias.bookstoremanager.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -26,7 +26,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique=true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
@@ -36,13 +36,12 @@ public class Book {
     private Integer chapters;
 
     @Column(nullable = false)
-    private Integer isbn;
+    private String isbn;
 
     @Column(name = "publisher_name", nullable = false, unique = true)
     private String publisherName;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "author_id")
     private Author author;
-    
 }
